@@ -39,6 +39,12 @@ public class Condition {
     return new FinalizedCondition(new Context().append(stringify(object)));
   }
 
+  public FinalizedCondition like(String like){
+    context.addParameter(like);
+    context.append(" LIKE ?");
+    return new FinalizedCondition(context);
+  }
+
   public FinalizedCondition isNull(){
     return new FinalizedCondition(context.append(" IS NULL"));
   }

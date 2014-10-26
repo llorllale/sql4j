@@ -713,4 +713,26 @@ public class SelectSyntaxTest {
     assertEquals(expected1, query.toSqlString());
     assertEquals(expected2, query.toPreparedSqlString());
   }
+
+  @Test 
+  public void like(){
+    FinalizedQuery query = new QueryBuilder(null).select()
+            .all()
+            .from()
+            .table("person p")
+            .where(column("p.name").like("JOHN%"))
+            ;
+    String expected1 = new StringBuilder("SELECT *").append(NEW_LINE)
+            .append("FROM person p").append(NEW_LINE)
+            .append("WHERE p.name LIKE 'JOHN%'").append(NEW_LINE)
+            .toString()
+            ;
+    String expected2 = new StringBuilder("SELECT *").append(NEW_LINE)
+            .append("FROM person p").append(NEW_LINE)
+            .append("WHERE p.name LIKE ?").append(NEW_LINE)
+            .toString()
+            ;
+    assertEquals(expected1, query.toSqlString());
+    assertEquals(expected2, query.toPreparedSqlString());
+  }
 }
