@@ -22,9 +22,9 @@ import org.sql4j.Condition.FinalizedCondition;
  * @author George Aristy
  */
 public class Having implements FinalizedQuery {
-  private final Context context;
+  private final SqlBuilder context;
 
-  Having(Context context, FinalizedCondition condition) {
+  Having(SqlBuilder context, FinalizedCondition condition) {
     this.context = context;
     this.context.append("HAVING ").append(condition.getContext().getParametrizedString());
     this.context.addParameters(condition.getContext().getParameters());

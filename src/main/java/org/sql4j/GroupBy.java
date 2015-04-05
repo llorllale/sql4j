@@ -23,9 +23,9 @@ import org.sql4j.Condition.FinalizedCondition;
  * @author George Aristy
  */
 public class GroupBy implements FinalizedQuery {
-  private final Context context;
+  private final SqlBuilder context;
 
-  GroupBy(Context context, String... columns) {
+  GroupBy(SqlBuilder context, String... columns) {
     this.context = context;
     this.context.append("GROUP BY ").appendLine(StringUtils.join(columns, ", "));
   }

@@ -22,9 +22,9 @@ import org.sql4j.Condition.FinalizedCondition;
  * @author George Aristy
  */
 public class Join {
-  private final Context context;
+  private final SqlBuilder context;
 
-  Join(Context context, String table) {
+  Join(SqlBuilder context, String table) {
     this.context = context;
     this.context.append(joinPrefix() + "JOIN ").append(table);
   }
@@ -40,7 +40,7 @@ public class Join {
   }
 
   public static class LeftInnerJoin extends Join {
-    LeftInnerJoin(Context context, String table) {
+    LeftInnerJoin(SqlBuilder context, String table) {
       super(context, table);
     }
 
@@ -51,7 +51,7 @@ public class Join {
   }
 
   public static class LeftOuterJoin extends Join {
-    LeftOuterJoin(Context context, String table) {
+    LeftOuterJoin(SqlBuilder context, String table) {
       super(context, table);
     }
 
@@ -62,7 +62,7 @@ public class Join {
   }
 
   public static class RightInnerJoin extends Join {
-    RightInnerJoin(Context context, String table) {
+    RightInnerJoin(SqlBuilder context, String table) {
       super(context, table);
     }
 
@@ -73,7 +73,7 @@ public class Join {
   }
 
   public static class RightOuterJoin extends Join {
-    RightOuterJoin(Context context, String table) {
+    RightOuterJoin(SqlBuilder context, String table) {
       super(context, table);
     }
 

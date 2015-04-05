@@ -24,19 +24,19 @@ import java.util.Date;
  * @author George Aristy
  */
 public class Condition {
-  private final Context context;
+  private final SqlBuilder context;
 
-  private Condition(Context context, String column) {
+  private Condition(SqlBuilder context, String column) {
     this.context = context;
     this.context.append(column);
   }
 
   public static Condition column(String column){
-    return new Condition(new Context(), column);
+    return new Condition(new SqlBuilder(), column);
   }
 
   public static FinalizedCondition literal(Object object){
-    return new FinalizedCondition(new Context().append(stringify(object)));
+    return new FinalizedCondition(new SqlBuilder().append(stringify(object)));
   }
 
   public FinalizedCondition like(String like){
@@ -127,22 +127,22 @@ public class Condition {
   }
 
   public static class FinalizedCondition {
-    private final Context context;
+    private final SqlBuilder context;
 
-    private FinalizedCondition(Context context) {
+    private FinalizedCondition(SqlBuilder context) {
       this.context = context;
     }
 
-    Context getContext(){
+    SqlBuilder getContext(){
       return context;
     }
   }
 
   public static class GroupCondition {
-    private final Context context;
+    private final SqlBuilder context;
 
     private GroupCondition() {
-      this.context = new Context();
+      this.context = new SqlBuilder();
     }
 
     public static GroupCondition group(FinalizedCondition condition){
@@ -164,7 +164,7 @@ public class Condition {
       return this;
     }
 
-    Context getContext(){
+    SqlBuilder getContext(){
       return context;
     }
   }

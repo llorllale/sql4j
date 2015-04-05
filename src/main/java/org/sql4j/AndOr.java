@@ -23,9 +23,9 @@ import org.sql4j.Condition.GroupCondition;
  * @author George Aristy
  */
 public class AndOr implements FinalizedQuery {
-  private final Context context;
+  private final SqlBuilder context;
 
-  AndOr(Context context) {
+  AndOr(SqlBuilder context) {
     this.context = context;
   }
 
@@ -57,14 +57,14 @@ public class AndOr implements FinalizedQuery {
 
   public AndOr and(GroupCondition groupCondition){
 //    context.append("AND ( ").append(groupCondition.getCondition()).appendLine(" )");
-    Context ctx = groupCondition.getContext();
+    SqlBuilder ctx = groupCondition.getContext();
     context.append("AND ( ").append(ctx.getParametrizedString()).appendLine(" )");
     context.addParameters(ctx.getParameters());
     return this;
   }
 
   public AndOr or(GroupCondition groupCondition){
-    Context ctx = groupCondition.getContext();
+    SqlBuilder ctx = groupCondition.getContext();
     context.append("OR ( ").append(ctx.getParametrizedString()).appendLine(" )");
     context.addParameters(ctx.getParameters());
     return this;

@@ -22,9 +22,9 @@ import org.apache.commons.lang3.StringUtils;
  * @author George Aristy
  */
 public class Select {
-  private final Context context;
+  private final SqlBuilder context;
 
-  Select(Context context) {
+  Select(SqlBuilder context) {
     this.context = context;
     context.append("SELECT ");
   }
@@ -48,7 +48,7 @@ public class Select {
   }
 
   public static class SelectForUpdate extends SelectFinalizer {
-    SelectForUpdate(Context context) {
+    SelectForUpdate(SqlBuilder context) {
       super(context);
     }
   
@@ -59,9 +59,9 @@ public class Select {
   }
 
   public static class SelectCount {
-    private final Context context;
+    private final SqlBuilder context;
   
-    SelectCount(Context context) {
+    SelectCount(SqlBuilder context) {
       this.context = context;
       this.context.append("COUNT(");
     }
@@ -77,9 +77,9 @@ public class Select {
   }
 
   public static class SelectCountDistinct {
-    private final Context context;
+    private final SqlBuilder context;
   
-    SelectCountDistinct(Context context) {
+    SelectCountDistinct(SqlBuilder context) {
       this.context = context;
       this.context.append("DISTINCT ");
     }
@@ -91,9 +91,9 @@ public class Select {
   }
 
   public static class SelectDistinct {
-    private final Context context;
+    private final SqlBuilder context;
   
-    SelectDistinct(Context context) {
+    SelectDistinct(SqlBuilder context) {
       this.context = context;
       this.context.append("DISTINCT ");
     }
@@ -105,9 +105,9 @@ public class Select {
   }
 
   public static class SelectFinalizer {
-    private final Context context;
+    private final SqlBuilder context;
 
-    SelectFinalizer(Context context) {
+    SelectFinalizer(SqlBuilder context) {
       this.context = context;
     }
 

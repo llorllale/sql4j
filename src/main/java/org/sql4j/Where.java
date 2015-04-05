@@ -26,9 +26,9 @@ import org.sql4j.Join.RightOuterJoin;
  * @author George Aristy
  */
 public class Where implements FinalizedQuery {
-  protected final Context context;
+  protected final SqlBuilder context;
 
-  Where(Context context) {
+  Where(SqlBuilder context) {
     this.context = context;
   }
 

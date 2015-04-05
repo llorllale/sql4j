@@ -22,9 +22,9 @@ import org.apache.commons.lang3.StringUtils;
  * @author George Aristy
  */
 public class From {
-  private final Context context;
+  private final SqlBuilder context;
 
-  From(Context context) {
+  From(SqlBuilder context) {
     this.context = context;
     this.context.append("FROM ");
   }

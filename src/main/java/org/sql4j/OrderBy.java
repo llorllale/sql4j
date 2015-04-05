@@ -22,9 +22,9 @@ import org.apache.commons.lang3.StringUtils;
  * @author George Aristy
  */
 public class OrderBy implements FinalizedQuery {
-  private final Context context;
+  private final SqlBuilder context;
 
-  OrderBy(Context context, String... columns) {
+  OrderBy(SqlBuilder context, String... columns) {
     this.context = context;
     this.context.append("ORDER BY ").append(StringUtils.join(columns, ", "));
   }
@@ -41,18 +41,18 @@ public class OrderBy implements FinalizedQuery {
 
   @Override
   public String toSqlString() {
-    return new Context(context).newLine().getSql();
+    return new SqlBuilder(context).newLine().getSql();
   }
 
   @Override
   public String toPreparedSqlString() {
-    return new Context(context).newLine().getParametrizedString();
+    return new SqlBuilder(context).newLine().getParametrizedString();
   }
 
   public static class FinalizedOrderBy implements FinalizedQuery {
-    private final Context context;
+    private final SqlBuilder context;
 
-    private FinalizedOrderBy(Context context) {
+    private FinalizedOrderBy(SqlBuilder context) {
       this.context = context;
     }
 

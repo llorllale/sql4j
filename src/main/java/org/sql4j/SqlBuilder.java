@@ -27,51 +27,51 @@ import java.util.List;
  *
  * @author George Aristy
  */
-class Context {
+class SqlBuilder {
   private Database database;
   private Connection connection;
   private final StringBuilder sql;
   private final List<Object> parameters;
 
-  Context(){
+  SqlBuilder(){
     this.sql = new StringBuilder();
     this.parameters = new ArrayList<>();
   }
 
-  Context(Database database, Connection connection) {
+  SqlBuilder(Database database, Connection connection) {
     this();
     this.database = database;
     this.connection = connection;
   }
 
-  Context(Context prototype){
+  SqlBuilder(SqlBuilder prototype){
     this.sql = new StringBuilder(prototype.sql);
     this.database = prototype.database;
     this.connection = prototype.connection;
     this.parameters = new ArrayList<>(prototype.parameters);
   }
 
-  Context addParameter(Object parameter){
+  SqlBuilder addParameter(Object parameter){
     parameters.add(parameter);
     return this;
   }
 
-  Context addParameters(List<Object> parameters){
+  SqlBuilder addParameters(List<Object> parameters){
     this.parameters.addAll(parameters);
     return this;
   }
 
-  Context append(String expression){
+  SqlBuilder append(String expression){
     sql.append(expression);
     return this;
   }
 
-  Context appendLine(String expression){
+  SqlBuilder appendLine(String expression){
     sql.append(expression).append(System.getProperty("line.separator"));
     return this;
   }
 
-  Context newLine(){
+  SqlBuilder newLine(){
     sql.append(System.getProperty("line.separator"));
     return this;
   }
@@ -96,7 +96,8 @@ class Context {
     return Collections.unmodifiableList(parameters);
   }
 
-  void execute() throws SQLException {
+  <T> List<T> list(T type) throws SQLException {
+    final List<T> list = new ArrayList<>();
     final String sqlString = sql.toString();
     int paramIndex = 1;
     int sqlParamIndex = 0;
@@ -109,5 +110,7 @@ class Context {
     }
 
     ResultSet result = stmt.executeQuery();
+
+    return list;
   }
 }

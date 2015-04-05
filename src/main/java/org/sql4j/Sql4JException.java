@@ -1,5 +1,5 @@
-/* 
- * Copyright 2014 George Aristy.
+/*
+ * Copyright 2015 George Aristy.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,16 @@
  */
 package org.sql4j;
 
-import java.sql.Connection;
-
 /**
  *
  * @author George Aristy
  */
-public class QueryBuilder {
-  private final SqlBuilder context;
-
-  public QueryBuilder(Connection connection) {
-    this.context = new SqlBuilder(null, connection);
+public class Sql4JException extends Exception {
+  Sql4JException(String message) {
+    super(message);
   }
 
-  public Select select() {
-    return new Select(context);
-  }
-
-  public Insert insertInto(String table){
-    return new Insert(context, table);
+  Sql4JException(String message, Throwable cause) {
+    super(message, cause);
   }
 }
