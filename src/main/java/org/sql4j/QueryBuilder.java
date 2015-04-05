@@ -35,4 +35,8 @@ public class QueryBuilder {
   public Insert insertInto(String table){
     return new Insert(context, table);
   }
+
+  public Update update(String table){
+    return new Update(context, table);
+  }
 }

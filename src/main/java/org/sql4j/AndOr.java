@@ -56,7 +56,6 @@ public class AndOr implements FinalizedQuery {
   }
 
   public AndOr and(GroupCondition groupCondition){
-//    context.append("AND ( ").append(groupCondition.getCondition()).appendLine(" )");
     SqlBuilder ctx = groupCondition.getContext();
     context.append("AND ( ").append(ctx.getParametrizedString()).appendLine(" )");
     context.addParameters(ctx.getParameters());
