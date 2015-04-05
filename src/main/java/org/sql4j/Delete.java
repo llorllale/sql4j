@@ -1,5 +1,5 @@
-/* 
- * Copyright 2014 George Aristy.
+/*
+ * Copyright 2015 George Aristy.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,32 +15,31 @@
  */
 package org.sql4j;
 
-import java.sql.Connection;
+import org.sql4j.Condition.FinalizedCondition;
 
 /**
  *
  * @author George Aristy
  */
-public class QueryBuilder {
-  private final SqlBuilder context;
+public class Delete implements FinalizedQuery {
+  private final SqlBuilder builder;
 
-  public QueryBuilder(Connection connection) {
-    this.context = new SqlBuilder(null, connection);
+  Delete(SqlBuilder builder, String table){
+    this.builder = builder;
+    this.builder.append("DELETE FROM ").appendLine(table);
   }
 
-  public Select select() {
-    return new Select(context);
+  public AndOr where(FinalizedCondition condition){
+    return new Where(builder).where(condition);
   }
 
-  public Insert insertInto(String table){
-    return new Insert(context, table);
+  @Override
+  public String toSqlString() {
+    return builder.getSql();
   }
 
-  public Update update(String table){
-    return new Update(context, table);
-  }
-
-  public Delete deleteFrom(String table){
-    return new Delete(context, table);
+  @Override
+  public String toPreparedSqlString() {
+    return builder.getParametrizedString();
   }
 }
