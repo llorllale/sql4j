@@ -67,13 +67,17 @@ class SqlBuilder {
   }
 
   SqlBuilder appendLine(String expression){
-    sql.append(expression).append(System.getProperty("line.separator"));
+    sql.append(expression).append(getNewLineChar());
     return this;
   }
 
   SqlBuilder newLine(){
-    sql.append(System.getProperty("line.separator"));
+    sql.append(getNewLineChar());
     return this;
+  }
+
+  String getNewLineChar(){
+    return System.getProperty("line.separator");
   }
 
   String getSql(){

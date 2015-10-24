@@ -55,7 +55,7 @@ public class Insert {
     }
   }
 
-  public static class FinalizedInsert implements FinalizedQuery {
+  public static class FinalizedInsert implements DmlSql {
     private final SqlBuilder builder;
 
     private FinalizedInsert(SqlBuilder builder){

@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @author George Aristy
  */
-public class OrderBy implements FinalizedQuery {
+public class OrderBy implements DmlSql {
   private final SqlBuilder context;
 
   OrderBy(SqlBuilder context, String... columns) {
@@ -49,7 +49,7 @@ public class OrderBy implements FinalizedQuery {
     return new SqlBuilder(context).newLine().getParametrizedString();
   }
 
-  public static class FinalizedOrderBy implements FinalizedQuery {
+  public static class FinalizedOrderBy implements DmlSql {
     private final SqlBuilder context;
 
     private FinalizedOrderBy(SqlBuilder context) {

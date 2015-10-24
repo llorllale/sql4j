@@ -43,4 +43,8 @@ public class QueryBuilder {
   public Delete deleteFrom(String table){
     return new Delete(context, table);
   }
+
+  public CreateTable createTable(String tableName){
+    return new CreateTable(context, tableName);
+  }
 }

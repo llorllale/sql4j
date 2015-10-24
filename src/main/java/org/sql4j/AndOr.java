@@ -22,21 +22,21 @@ import org.sql4j.Condition.GroupCondition;
  *
  * @author George Aristy
  */
-public class AndOr implements FinalizedQuery {
+public class AndOr implements DmlSql {
   private final SqlBuilder context;
 
   AndOr(SqlBuilder context) {
     this.context = context;
   }
 
-  public AndOr and(FinalizedQuery query){
+  public AndOr and(DmlSql query){
     context.append("AND ( ")
             .append(query.toPreparedSqlString())
             .append(" )");
     return this;
   }
 
-  public AndOr or(FinalizedQuery query){
+  public AndOr or(DmlSql query){
     context.append("OR ( ")
             .append(query.toPreparedSqlString())
             .append(" )");

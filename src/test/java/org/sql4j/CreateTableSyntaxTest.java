@@ -17,17 +17,16 @@ package org.sql4j;
 
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.sql4j.Condition.column;
+import static org.sql4j.Column.newColumn;
 
 /**
  *
  * @author George Aristy
  */
-public class DeleteSyntaxTest {
+public class CreateTableSyntaxTest {
   private static final String NEW_LINE = System.getProperty("line.separator");
   
   @BeforeClass
@@ -45,33 +44,13 @@ public class DeleteSyntaxTest {
   @After
   public void tearDown() {
   }
-
+ 
   @Test
-  public void deleteNoConditions(){
-    DmlSql query = new QueryBuilder(null).deleteFrom("test");
-
-    String expected = "DELETE FROM test" + NEW_LINE;
-
-    assertEquals(expected, query.toSqlString());
-    assertEquals(expected, query.toPreparedSqlString());
-  }
-
-  @Test
-  public void deleteWithConditions(){
-    DmlSql query  = new QueryBuilder(null).deleteFrom("clients")
-            .where(column("last_name").eq("Doe"))
+  public void testCreateTable(){
+    DdlSql sql = new QueryBuilder(null).createTable("test")
+            .column(newColumn("first_name").typeString(40))
+            .column(newColumn("last_name").typeString(40))
             ;
-
-    String expected1 = new StringBuilder("DELETE FROM clients").append(NEW_LINE)
-            .append("WHERE last_name = 'Doe'").append(NEW_LINE)
-            .toString()
-            ;
-    String expected2 = new StringBuilder("DELETE FROM clients").append(NEW_LINE)
-            .append("WHERE last_name = ?").append(NEW_LINE)
-            .toString()
-            ;
-
-    assertEquals(expected1, query.toSqlString());
-    assertEquals(expected2, query.toPreparedSqlString());
+    System.out.println(sql.toSqlString());
   }
 }

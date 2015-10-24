@@ -36,7 +36,7 @@ public class Update {
     return new FinalizedUpdate(builder);
   }
 
-  public static class FinalizedUpdate implements FinalizedQuery {
+  public static class FinalizedUpdate implements DmlSql {
     private final SqlBuilder builder;
 
     private FinalizedUpdate(SqlBuilder builder) {

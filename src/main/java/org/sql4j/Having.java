@@ -21,7 +21,7 @@ import org.sql4j.Condition.FinalizedCondition;
  *
  * @author George Aristy
  */
-public class Having implements FinalizedQuery {
+public class Having implements DmlSql {
   private final SqlBuilder context;
 
   Having(SqlBuilder context, FinalizedCondition condition) {

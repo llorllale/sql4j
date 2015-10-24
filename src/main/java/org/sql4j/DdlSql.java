@@ -1,5 +1,5 @@
-/* 
- * Copyright 2014 George Aristy.
+/*
+ * Copyright 2015 George Aristy.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,6 @@ package org.sql4j;
  *
  * @author George Aristy
  */
-public interface FinalizedQuery {
+public interface DdlSql {
   public String toSqlString();
-
-  public String toPreparedSqlString();
 }

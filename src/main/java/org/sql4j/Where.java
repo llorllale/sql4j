@@ -25,7 +25,7 @@ import org.sql4j.Join.RightOuterJoin;
  *
  * @author George Aristy
  */
-public class Where implements FinalizedQuery {
+public class Where implements DmlSql {
   protected final SqlBuilder context;
 
   Where(SqlBuilder context) {

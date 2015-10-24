@@ -44,7 +44,7 @@ public class UpdateSyntaxTest {
   @Test
   public void updateNoConditions(){
     //SINGLE FIELD UPDATE
-    FinalizedQuery query = new QueryBuilder(null).update("clients")
+    DmlSql query = new QueryBuilder(null).update("clients")
             .set("salary", 70000)
             ;
 
@@ -83,7 +83,7 @@ public class UpdateSyntaxTest {
 
   @Test
   public void updateWithConditions(){
-    FinalizedQuery query = new QueryBuilder(null).update("clients")
+    DmlSql query = new QueryBuilder(null).update("clients")
             .set("salary", 70000)
             .where(column("name").like("BOB%"))
             ;

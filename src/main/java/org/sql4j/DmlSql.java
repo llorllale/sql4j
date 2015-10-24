@@ -1,5 +1,5 @@
-/*
- * Copyright 2015 George Aristy.
+/* 
+ * Copyright 2014 George Aristy.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,31 +15,12 @@
  */
 package org.sql4j;
 
-import org.sql4j.Condition.FinalizedCondition;
-
 /**
  *
  * @author George Aristy
  */
-public class Delete implements DmlSql {
-  private final SqlBuilder builder;
+public interface DmlSql {
+  public String toSqlString();
 
-  Delete(SqlBuilder builder, String table){
-    this.builder = builder;
-    this.builder.append("DELETE FROM ").appendLine(table);
-  }
-
-  public AndOr where(FinalizedCondition condition){
-    return new Where(builder).where(condition);
-  }
-
-  @Override
-  public String toSqlString() {
-    return builder.getSql();
-  }
-
-  @Override
-  public String toPreparedSqlString() {
-    return builder.getParametrizedString();
-  }
+  public String toPreparedSqlString();
 }

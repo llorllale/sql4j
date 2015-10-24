@@ -48,7 +48,7 @@ public class InsertSyntaxTest {
 
   @Test
   public void insertColumnsAndValues(){
-    FinalizedQuery query = new QueryBuilder(null).insertInto("test")
+    DmlSql query = new QueryBuilder(null).insertInto("test")
             .columns("column1", "column2", "column3")
             .values("value1", "value2", "value3")
             ;
@@ -62,7 +62,7 @@ public class InsertSyntaxTest {
 
   @Test
   public void insertValues(){
-    FinalizedQuery query = new QueryBuilder(null).insertInto("test")
+    DmlSql query = new QueryBuilder(null).insertInto("test")
             .values("value1", "value2", "value3")
             ;
     

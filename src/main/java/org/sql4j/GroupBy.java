@@ -22,7 +22,7 @@ import org.sql4j.Condition.FinalizedCondition;
  *
  * @author George Aristy
  */
-public class GroupBy implements FinalizedQuery {
+public class GroupBy implements DmlSql {
   private final SqlBuilder context;
 
   GroupBy(SqlBuilder context, String... columns) {

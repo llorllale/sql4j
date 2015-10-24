@@ -54,7 +54,7 @@ public class SelectSyntaxTest {
   @Test
   public void selectAllFromTable() {
     //SINGLE TABLE
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .all()
             .from()
             .tables("person");
@@ -88,7 +88,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectDistinctFromTable() {
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .distinct()
             .columns("name", "age", "email")
             .from()
@@ -108,7 +108,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectForUpdate(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .columns("name", "age", "email")
             .forUpdate()
             .from()
@@ -128,7 +128,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectAllFromTableWhere(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .all()
             .from()
             .tables("person")
@@ -294,7 +294,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectColumnsFromTableWhereGroupBy(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .columns("age", "sex")
             .from()
             .tables("person")
@@ -344,7 +344,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectColumnsFromTableWhereGroupByOrderBy(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .columns("id", "name", "email", "balance")
             .from()
             .tables("accounts")
@@ -378,7 +378,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectColumnsFromTableWhereGroupByOrderByWithOrder(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .columns("number", "street", "city", "state")
             .from()
             .tables("region")
@@ -443,7 +443,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectColumnsFromTableWhereGroupByHaving(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .columns("c.city", "c.state", "p.population")
             .from()
             .tables("city c", "population p")
@@ -480,7 +480,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectColumnsFromTableWhereGroupByOrderByHaving(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .columns("street", "number", "sector", "city")
             .from()
             .tables("region")
@@ -518,7 +518,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectFromTableLeftInnerJoin(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .all()
             .from()
             .table("person p")
@@ -564,7 +564,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectFromTableLeftOuterJoin(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .columns("name", "age")
             .from()
             .table("person p")
@@ -593,7 +593,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectFromTableRightInnerJoin(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .distinct()
             .columns("p.name")
             .from()
@@ -616,7 +616,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectFromTableRightOuterJoin(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .all()
             .from()
             .tables("contact c", "account a", "person p")
@@ -644,7 +644,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectCountFromTable(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .count()
             .column("name")
             .from()
@@ -667,7 +667,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void selectCountDistinctFromTable(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .count()
             .distinct()
             .column("c.name")
@@ -694,7 +694,7 @@ public class SelectSyntaxTest {
 
   @Test
   public void nullCondition(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .all()
             .from()
             .table("person")
@@ -716,7 +716,7 @@ public class SelectSyntaxTest {
 
   @Test 
   public void like(){
-    FinalizedQuery query = new QueryBuilder(null).select()
+    DmlSql query = new QueryBuilder(null).select()
             .all()
             .from()
             .table("person p")
