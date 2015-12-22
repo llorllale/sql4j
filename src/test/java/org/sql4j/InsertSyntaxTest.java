@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.sql4j.Condition.column;
 
 /**
  *
@@ -70,6 +71,70 @@ public class InsertSyntaxTest {
     String expected2 = "INSERT INTO test VALUES (?, ?, ?)" + NEW_LINE;
 
     assertEquals(expected1, query.toSqlString());
+    assertEquals(expected2, query.toPreparedSqlString());
+  }
+
+  @Test
+  public void insertQuery(){
+    DmlSql query = new QueryBuilder(null)
+            .insertInto("test_table")
+            .query(new QueryBuilder(null)
+                    .select()
+                    .columns("name", "value")
+                    .from()
+                    .table("other_table")
+            );
+
+    String expected = "INSERT INTO test_table ( SELECT name, value" + NEW_LINE + "FROM other_table" + NEW_LINE + ")" + NEW_LINE;
+    String expected2 = "INSERT INTO test_table ( SELECT name, value" + NEW_LINE + "FROM other_table" + NEW_LINE + ")" + NEW_LINE;
+
+    assertEquals(expected, query.toSqlString());
+    assertEquals(expected2, query.toPreparedSqlString());
+
+    query = new QueryBuilder(null)
+            .insertInto("test_table")
+            .columns("name", "value")
+            .query(new QueryBuilder(null)
+                    .select()
+                    .columns("name", "value")
+                    .from()
+                    .table("other_table")
+            );
+
+    expected = "INSERT INTO test_table (name, value) VALUES ( SELECT name, value" + NEW_LINE + "FROM other_table" + NEW_LINE + ")" + NEW_LINE;
+    expected2 = "INSERT INTO test_table (name, value) VALUES ( SELECT name, value" + NEW_LINE + "FROM other_table" + NEW_LINE + ")" + NEW_LINE;
+
+    assertEquals(expected, query.toSqlString());
+    assertEquals(expected2, query.toPreparedSqlString());
+
+    query = new QueryBuilder(null)
+            .insertInto("test_table")
+            .query(new QueryBuilder(null)
+                    .select()
+                    .all()
+                    .from()
+                    .table("other_table")
+                    .where(column("id").eq(1))
+            );
+
+    expected = "INSERT INTO test_table ( SELECT *" 
+            + NEW_LINE 
+            + "FROM other_table" 
+            + NEW_LINE 
+            + "WHERE id = 1" 
+            + NEW_LINE 
+            + ")" 
+            + NEW_LINE;
+    expected2 = "INSERT INTO test_table ( SELECT *" 
+            + NEW_LINE 
+            + "FROM other_table" 
+            + NEW_LINE 
+            + "WHERE id = ?"
+            + NEW_LINE 
+            + ")" 
+            + NEW_LINE;
+
+    assertEquals(expected, query.toSqlString());
     assertEquals(expected2, query.toPreparedSqlString());
   }
 }

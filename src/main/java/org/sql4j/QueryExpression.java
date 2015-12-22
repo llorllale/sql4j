@@ -1,5 +1,5 @@
-/* 
- * Copyright 2014 George Aristy.
+/*
+ * Copyright 2015 George Aristy.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,16 +15,10 @@
  */
 package org.sql4j;
 
-import java.util.List;
-
 /**
- *
+ * Marker interface to identify DML statements that produce query expressions (ie. "select" statements).
  * @author George Aristy
  */
-public interface DmlSql {
-  public String toSqlString();
+public interface QueryExpression extends DmlSql {
 
-  public String toPreparedSqlString();
-
-  public List<Object> getParameters();
 }

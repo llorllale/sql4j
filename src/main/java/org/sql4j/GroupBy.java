@@ -15,6 +15,7 @@
  */
 package org.sql4j;
 
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.sql4j.Condition.FinalizedCondition;
 
@@ -22,7 +23,7 @@ import org.sql4j.Condition.FinalizedCondition;
  *
  * @author George Aristy
  */
-public class GroupBy implements DmlSql {
+public class GroupBy implements QueryExpression {
   private final SqlBuilder context;
 
   GroupBy(SqlBuilder context, String... columns) {
@@ -46,5 +47,10 @@ public class GroupBy implements DmlSql {
   @Override
   public String toPreparedSqlString() {
     return context.getParametrizedString();
+  }
+
+  @Override
+  public List<Object> getParameters() {
+    return context.getParameters();
   }
 }

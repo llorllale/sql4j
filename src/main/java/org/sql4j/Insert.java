@@ -16,6 +16,7 @@
 package org.sql4j;
 
 import java.util.Arrays;
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -40,6 +41,12 @@ public class Insert {
     return iv.values(values);
   }
 
+  public FinalizedInsert query(QueryExpression query){
+    builder.addParameters(query.getParameters());
+    builder.appendLine(" ( " + query.toPreparedSqlString() + ")");
+    return new FinalizedInsert(builder);
+  }
+
   public static class InsertValues {
     private final SqlBuilder builder;
 
@@ -51,6 +58,12 @@ public class Insert {
     public FinalizedInsert values(Object... values){
       builder.addParameters(Arrays.asList(values));
       builder.appendLine(StringUtils.repeat("?, ", values.length-1) + "?)");
+      return new FinalizedInsert(builder);
+    }
+
+    public FinalizedInsert query(QueryExpression query){
+      builder.addParameters(query.getParameters());
+      builder.appendLine(" " + query.toPreparedSqlString() + ")");
       return new FinalizedInsert(builder);
     }
   }
@@ -70,6 +83,11 @@ public class Insert {
     @Override
     public String toPreparedSqlString() {
       return builder.getParametrizedString();
+    }
+
+    @Override
+    public List<Object> getParameters() {
+      return builder.getParameters();
     }
   }
 }

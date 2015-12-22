@@ -15,6 +15,7 @@
  */
 package org.sql4j;
 
+import java.util.List;
 import org.sql4j.Condition.FinalizedCondition;
 import org.sql4j.Join.LeftInnerJoin;
 import org.sql4j.Join.LeftOuterJoin;
@@ -25,7 +26,7 @@ import org.sql4j.Join.RightOuterJoin;
  *
  * @author George Aristy
  */
-public class Where implements DmlSql {
+public class Where implements QueryExpression {
   protected final SqlBuilder context;
 
   Where(SqlBuilder context) {
@@ -74,5 +75,10 @@ public class Where implements DmlSql {
   @Override
   public String toPreparedSqlString() {
     return context.getParametrizedString();
+  }
+
+  @Override
+  public List<Object> getParameters() {
+    return context.getParameters();
   }
 }

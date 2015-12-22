@@ -15,13 +15,14 @@
  */
 package org.sql4j;
 
+import java.util.List;
 import org.sql4j.Condition.FinalizedCondition;
 
 /**
  *
  * @author George Aristy
  */
-public class Having implements DmlSql {
+public class Having implements QueryExpression {
   private final SqlBuilder context;
 
   Having(SqlBuilder context, FinalizedCondition condition) {
@@ -50,5 +51,10 @@ public class Having implements DmlSql {
   @Override
   public String toPreparedSqlString() {
     return context.getParametrizedString();
+  }
+
+  @Override
+  public List<Object> getParameters() {
+    return context.getParameters();
   }
 }

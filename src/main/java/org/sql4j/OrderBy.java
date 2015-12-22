@@ -15,13 +15,14 @@
  */
 package org.sql4j;
 
+import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 /**
  *
  * @author George Aristy
  */
-public class OrderBy implements DmlSql {
+public class OrderBy implements QueryExpression {
   private final SqlBuilder context;
 
   OrderBy(SqlBuilder context, String... columns) {
@@ -49,7 +50,12 @@ public class OrderBy implements DmlSql {
     return new SqlBuilder(context).newLine().getParametrizedString();
   }
 
-  public static class FinalizedOrderBy implements DmlSql {
+  @Override
+  public List<Object> getParameters() {
+    return context.getParameters();
+  }
+
+  public static class FinalizedOrderBy implements QueryExpression {
     private final SqlBuilder context;
 
     private FinalizedOrderBy(SqlBuilder context) {
@@ -64,6 +70,11 @@ public class OrderBy implements DmlSql {
     @Override
     public String toPreparedSqlString() {
       return context.getParametrizedString();
+    }
+
+    @Override
+    public List<Object> getParameters() {
+      return context.getParameters();
     }
   }
 }

@@ -15,6 +15,7 @@
  */
 package org.sql4j;
 
+import java.util.List;
 import org.sql4j.Condition.FinalizedCondition;
 
 /**
@@ -41,5 +42,10 @@ public class Delete implements DmlSql {
   @Override
   public String toPreparedSqlString() {
     return builder.getParametrizedString();
+  }
+
+  @Override
+  public List<Object> getParameters() {
+    return builder.getParameters();
   }
 }

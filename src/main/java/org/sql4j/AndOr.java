@@ -15,6 +15,7 @@
  */
 package org.sql4j;
 
+import java.util.List;
 import org.sql4j.Condition.FinalizedCondition;
 import org.sql4j.Condition.GroupCondition;
 
@@ -22,7 +23,7 @@ import org.sql4j.Condition.GroupCondition;
  *
  * @author George Aristy
  */
-public class AndOr implements DmlSql {
+public class AndOr implements QueryExpression {
   private final SqlBuilder context;
 
   AndOr(SqlBuilder context) {
@@ -85,5 +86,10 @@ public class AndOr implements DmlSql {
   @Override
   public String toPreparedSqlString() {
     return context.getParametrizedString();
+  }
+
+  @Override
+  public List<Object> getParameters() {
+    return context.getParameters();
   }
 }
